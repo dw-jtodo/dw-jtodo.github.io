@@ -14,15 +14,12 @@
           document.getElementById('push').addEventListener('click', clickPusher , false);
           
           navigator.serviceWorker.ready.then(function(sw) {
-            alert('navigator.serviceWorker.ready');
             sw.pushManager.getSubscription().then(setSubscription, resetSubscription);
           });
         }, false);
         
         function clickRegister() {
-          alert('clickRegister');
           navigator.serviceWorker.register('push.js').then(function() {
-            alert('navigator.serviceWorker.register');
             if (Notification.permission == 'denied') {
               alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
               return;
