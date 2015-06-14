@@ -1,0 +1,12 @@
+{
+  "name": "push-test",
+  "short_name": "push-test",
+  "icons": [{
+    "src": "",
+    "sizes": "256x256",
+    "type": "image/png"
+  }],
+  "start_url": "https://jtodo.github.io/",
+  "display": "standalone",
+  "gcm_sender_id": "680247021962"
+}
