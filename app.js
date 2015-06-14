@@ -12,7 +12,7 @@ window.addEventListener('load', function() {
       // subscribe
       alert("subscribe");
       sw.pushManager.subscribe().then(setSubscription, resetSubscription);
-    }
+    });
   });
 }, false);
 
