@@ -43,19 +43,24 @@ function clickNotify() {
 	}
 	
 	if (Notification.permission === "granted") {
-		setTimeout(function() {
-			var notification = new Notification("テストだよ");
-		}, 5000);
+		setNotify();
 	}
 	else if (Notification.permission !== 'denied') {
 		Notification.requestPermission(function (permission) {
 			if (permission === "granted") {
-				setTimeout(function() {
-					var notification = new Notification("テストだよ");
-				}, 5000);
+				setNotify();
 			}
 		});
 	}
+}
+
+function setNotify() {
+	setTimeout(function() {
+		var notification = new Notification("テストだよ");
+		notification.addEventListener('click', function() {
+			open('https://jtodo.github.io/');
+		});
+	}, 3000);
 }
 
 function clickSubscribe() {
