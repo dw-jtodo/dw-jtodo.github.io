@@ -1,20 +1,14 @@
 var subscription = null;
 
 window.addEventListener('load', function() {
-  // ready
-  alert("ready");
-  navigator.serviceWorker.ready.then(function(sw) {
-    sw.pushManager.getSubscription().then(setSubscription, resetSubscription);
+  // register
+  alert("register");
+  navigator.serviceWorker.register('push.js').then(function() {
+    if (Notification.permission == 'denied') return resetSubscription();
     
-    // register
-    alert("register");
-    navigator.serviceWorker.register('push.js').then(function() {
-      if (Notification.permission == 'denied') return resetSubscription();
-      
-      // ready
-      alert("subscribe");
-      sw.pushManager.subscribe().then(setSubscription, resetSubscription);
-    });
+    // ready
+    alert("subscribe");
+    sw.pushManager.subscribe().then(setSubscription, resetSubscription);
   });
 }, false);
 
