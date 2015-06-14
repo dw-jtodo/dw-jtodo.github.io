@@ -58,7 +58,7 @@ function setNotify() {
 	setTimeout(function() {
 		var notification = new Notification("テストだよ");
 		notification.addEventListener('click', function() {
-			open('https://jtodo.github.io/');
+			window.focus();
 		});
 	}, 3000);
 }
