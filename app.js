@@ -1,37 +1,47 @@
 var subscription = null;
 
 window.addEventListener('load', function() {
-  // register
-  alert("register");
-  navigator.serviceWorker.register('push.js').then(function(sw) {
-    if (Notification.permission == 'denied') return resetSubscription();
-    
-    // subscribe
-    alert("subscribe");
-    sw.pushManager.subscribe().then(setSubscription, resetSubscription);
-  });
+	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
+	
+	// register
+	navigator.serviceWorker.register('push.js').then(function(sw) {
+		if (Notification.permission == 'denied') alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
+	});
 }, false);
 
-function setSubscription(s) {
-  alert("setSubscription");
-  if (s) {
-    var endpoint = s.endpoint;
-    if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43以前への対処
-      endpoint += '/' + s.subscriptionId;
-    }
-    
-    // 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
-    // endpointにプッシュサービスのエンドポイントのURLが格納される
-    alert(endpoint);
-    
-    subscription = s;
-  }
-  else {
-    resetSubscription();
-  }
+function clickSubscribe() {
+	// subscribe
+	sw.pushManager.subscribe().then(checkSubscription, resetSubscription);
 }
 
-function resetSubscription(s) {
-  alert("resetSubscription");
-  subscription = null;
+function checkSubscription(s) {
+	if (s) {
+		setSubscription(s);
+	}
+	else {
+		resetSubscription();
+	}
+}
+
+function setSubscription(s) {
+	var endpoint = s.endpoint;
+	//if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43以前への対処
+	//	endpoint += '/' + s.subscriptionId;
+	//}
+	
+	var button = document.getElementById('subscribe');
+	button.textContent = '購読を解除する';
+	
+	// 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
+	// endpointにプッシュサービスのエンドポイントのURLが格納される
+	console.log(endpoint);
+	
+	subscription = s;
+}
+
+function resetSubscription() {
+	var button = document.getElementById('subscribe');
+	button.textContent = '購読する';
+	
+	subscription = null;
 }
