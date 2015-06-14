@@ -1,11 +1,10 @@
 self.addEventListener('push', function(evt) {
   evt.waitUntil(
     self.registration.showNotification(
-      '(プッシュ通知に表示するタイトル)',
+      '新着メッセージがありますよ！',
       {
-        icon: '(アイコンのURL(パスのみでOK))',
-        body: '(プッシュ通知に表示する説明テキスト)',
-        tag: '(識別用の適当なタグ("tag", "notification", 等)'
+        body: 'クリックしてね！',
+        tag: 'push_test'
       }
     )
   );
@@ -15,13 +14,15 @@ self.addEventListener('notificationclick', function(evt) {
   evt.notification.close();
   
   evt.waitUntil(
-    clients.matchAll({ type: 'window' }).then(function(evt) {
+    clients.matchAll({ type: 'window' }).then(function(matchedClients) {
+      console.log(location.pathname);
       var p = location.pathname.split('/');
       p.pop();
       p = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + p.join('/') + '/';
+      console.log(p);
       
-      for (var i = 0 ; i < evt.length ; i++) {
-        var c = evt[i];
+      for (var i = 0 ; i < matchedClients.length ; i++) {
+        var c = matchedClients[i];
         
         if (((c.url == p) || (c.url == p + 'index.html')) && ('focus' in c)) {
           return c.focus();
