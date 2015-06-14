@@ -2,6 +2,7 @@ var serviceWorker = null;
 var currentSubscription = null;
 
 window.addEventListener('load', function() {
+	document.getElementById('notify').addEventListener('click', clickNotify, false);
 	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
 	
 	// ready
@@ -33,6 +34,25 @@ window.addEventListener('load', function() {
 		}
 	});
 }, false);
+
+function clickNotify() {
+	if (!("Notification" in window)) {
+		document.getElementById('notify').disabled = true;
+		alert('通知を有効にできません。ブラウザの設定を確認して下さい。');
+		return;
+	}
+	
+	if (Notification.permission === "granted") {
+		var notification = new Notification("テストだよ");
+	}
+	else if (Notification.permission !== 'denied') {
+		Notification.requestPermission(function (permission) {
+			if (permission === "granted") {
+				var notification = new Notification("テストだよ");
+			}
+		});
+	}}
+}
 
 function clickSubscribe() {
 	if (currentSubscription == null) {
