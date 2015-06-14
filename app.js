@@ -51,7 +51,7 @@ function clickNotify() {
 				var notification = new Notification("テストだよ");
 			}
 		});
-	}}
+	}
 }
 
 function clickSubscribe() {
