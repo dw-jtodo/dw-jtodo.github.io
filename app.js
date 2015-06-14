@@ -4,16 +4,34 @@ var currentSubscription = null;
 window.addEventListener('load', function() {
 	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
 	
-	// register
-	navigator.serviceWorker.register('push.js').then(function(sw) {
+	// ready
+	navigator.serviceWorker.ready.then(function(sw) {
 		if (Notification.permission == 'denied') {
 			alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
 			return;
 		}
 		
-		document.getElementById('subscribe').disabled = false;
-		
-		serviceWorker = sw;
+		if (!sw) {
+			// register
+			navigator.serviceWorker.register('push.js').then(function(sw) {
+				document.getElementById('subscribe').disabled = false;
+				
+				serviceWorker = sw;
+			});
+		}
+		else {
+			serviceWorker = sw;
+			
+			// subscribed
+			serviceWorker.pushManager.getSubscription().then(function(s) {
+				if (s) {
+					setSubscription(s);
+				}
+				else {
+					resetSubscription();
+				}
+			}, resetSubscription);
+		}
 	});
 }, false);
 
