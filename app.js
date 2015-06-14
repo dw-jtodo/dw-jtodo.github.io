@@ -35,7 +35,7 @@ function setSubscription(s) {
   }
 }
 
-function resetSubscription() {
+function resetSubscription(s) {
   alert("resetSubscription");
   subscription = null;
 }
