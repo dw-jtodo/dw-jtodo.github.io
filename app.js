@@ -43,12 +43,16 @@ function clickNotify() {
 	}
 	
 	if (Notification.permission === "granted") {
-		var notification = new Notification("テストだよ");
+		setTimeout(function() {
+			var notification = new Notification("テストだよ");
+		}, 5000);
 	}
 	else if (Notification.permission !== 'denied') {
 		Notification.requestPermission(function (permission) {
 			if (permission === "granted") {
-				var notification = new Notification("テストだよ");
+				setTimeout(function() {
+					var notification = new Notification("テストだよ");
+				}, 5000);
 			}
 		});
 	}
