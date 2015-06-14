@@ -39,7 +39,7 @@ function clickSubscribe() {
 function setSubscription(subscription) {
 	document.getElementById('subscribe').textContent = '購読を解除する';
 	
-	var endpoint = subscription.endpoint;
+	var endpoint = subscription.endpoint + '/' + subscription.subscriptionId;
 	
 	// 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
 	// endpointにプッシュサービスのエンドポイントのURLが格納される
@@ -48,7 +48,8 @@ function setSubscription(subscription) {
 	currentSubscription = subscription;
 }
 
-function resetSubscription() {
+function re
+setSubscription() {
 	document.getElementById('subscribe').textContent = '購読する';
 	
 	currentSubscription = null;
