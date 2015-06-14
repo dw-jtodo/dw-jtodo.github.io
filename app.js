@@ -7,8 +7,12 @@ window.addEventListener('load', function() {
     if (Notification.permission == 'denied') return resetSubscription();
     
     // ready
-    alert("subscribe");
-    sw.pushManager.subscribe().then(setSubscription, resetSubscription);
+    alert("ready");
+    navigator.serviceWorker.ready.then(function(sw) {
+      // subscribe
+      alert("subscribe");
+      sw.pushManager.subscribe().then(setSubscription, resetSubscription);
+    }
   });
 }, false);
 
