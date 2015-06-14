@@ -15,16 +15,16 @@ self.addEventListener('notificationclick', function(evt) {
   
   evt.waitUntil(
     clients.matchAll({ type: 'window' }).then(function(matchedClients) {
-      console.log(location.pathname);
       var p = location.pathname.split('/');
       p.pop();
-      p = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + p.join('/') + '/';
-      console.log(p);
+      
+      var url = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + p.join('/') + '/';
       
       for (var i = 0 ; i < matchedClients.length ; i++) {
         var c = matchedClients[i];
         
-        if (((c.url == p) || (c.url == p + 'index.html')) && ('focus' in c)) {
+        console.log(c.url);
+        if (((c.url == url) || (c.url == url + 'index.html')) && ('focus' in c)) {
           return c.focus();
         }
       }
