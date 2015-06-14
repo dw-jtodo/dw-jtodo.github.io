@@ -7,8 +7,8 @@ window.addEventListener('load', function() {
 	// ready
 	navigator.serviceWorker.ready.then(function(sw) {
 		if (Notification.permission == 'denied') {
-			alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
 			document.getElementById('subscribe').disabled = true;
+			alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
 			return;
 		}
 		
