@@ -1,11 +1,11 @@
 self.addEventListener('push', function(evt) {
   evt.waitUntil(
     self.registration.showNotification(
-      '(ƒvƒbƒVƒ…’Ê’m‚É•\¦‚·‚éƒ^ƒCƒgƒ‹)',
+      '(ãƒ—ãƒƒã‚·ãƒ¥é€šçŸ¥ã«è¡¨ç¤ºã™ã‚‹ã‚¿ã‚¤ãƒˆãƒ«)',
       {
-        icon: '(ƒAƒCƒRƒ“‚ÌURL(ƒpƒX‚Ì‚İ‚ÅOK))',
-        body: '(ƒvƒbƒVƒ…’Ê’m‚É•\¦‚·‚éà–¾ƒeƒLƒXƒg)',
-        tag: '(¯•Ê—p‚Ì“K“–‚Èƒ^ƒO("tag", "notification", “™)'
+        icon: '(ã‚¢ã‚¤ã‚³ãƒ³ã®URL(ãƒ‘ã‚¹ã®ã¿ã§OK))',
+        body: '(ãƒ—ãƒƒã‚·ãƒ¥é€šçŸ¥ã«è¡¨ç¤ºã™ã‚‹èª¬æ˜ãƒ†ã‚­ã‚¹ãƒˆ)',
+        tag: '(è­˜åˆ¥ç”¨ã®é©å½“ãªã‚¿ã‚°("tag", "notification", ç­‰)'
       }
     )
   );

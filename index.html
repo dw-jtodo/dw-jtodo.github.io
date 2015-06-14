@@ -24,7 +24,7 @@
           navigator.serviceWorker.register('push.js').then(function() {
             alert('navigator.serviceWorker.register');
             if (Notification.permission == 'denied') {
-              alert('�v�b�V���ʒm��L���ɂł��܂���B�u���E�U�̐ݒ���m�F���ĉ������B');
+              alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
               return;
             }
           });
@@ -39,12 +39,12 @@
         function setSubscription(s) {
           if (s) {
             var endpoint = s.endpoint;
-            if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43�ȑO�ւ̑Ώ�
+            if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43以前への対処
               endpoint += '/' + s.subscriptionId;
             }
             
-            // ������Web�A�v���T�[�o���Ƀv�b�V���ʒm��o�^���鏈���������Ɏ���
-            // endpoint�Ƀv�b�V���T�[�r�X�̃G���h�|�C���g��URL���i�[�����
+            // 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
+            // endpointにプッシュサービスのエンドポイントのURLが格納される
             alert(endpoint);
             
             subscription = s;
@@ -59,7 +59,7 @@
         }
     </script>
     
-    <button id="register">�C���X�g�[��</button>
-    <button id="push">�v�b�V���ʒm��L���ɂ���</button>
+    <button id="register">インストール</button>
+    <button id="push">プッシュ通知を有効にする</button>
   </body>
 </html>
