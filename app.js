@@ -37,19 +37,20 @@ function clickSubscribe() {
 }
 
 function setSubscription(subscription) {
-	document.getElementById('subscribe').textContent = '購読を解除する';
-	
 	var endpoint = subscription.endpoint + '/' + subscription.subscriptionId;
 	
 	// 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
 	// endpointにプッシュサービスのエンドポイントのURLが格納される
-	console.log(endpoint);
+	
+	document.getElementById('subscribe').textContent = '購読を解除する';
+	document.getElementById('subscribeId').textContent = '購読ID: '+ endpoint;
 	
 	currentSubscription = subscription;
 }
 
 function resetSubscription() {
 	document.getElementById('subscribe').textContent = '購読する';
+	document.getElementById('subscribeId').textContent = '';
 	
 	currentSubscription = null;
 }
