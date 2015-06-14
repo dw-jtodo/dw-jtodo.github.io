@@ -48,8 +48,7 @@ function setSubscription(subscription) {
 	currentSubscription = subscription;
 }
 
-function re
-setSubscription() {
+function resetSubscription() {
 	document.getElementById('subscribe').textContent = '購読する';
 	
 	currentSubscription = null;
