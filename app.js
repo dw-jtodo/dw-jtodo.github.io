@@ -1,5 +1,5 @@
 var serviceWorker = null;
-var subscription = null;
+var currentSubscription = null;
 
 window.addEventListener('load', function() {
 	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
@@ -18,35 +18,38 @@ window.addEventListener('load', function() {
 }, false);
 
 function clickSubscribe() {
-	serviceWorker.pushManager.subscribe().then(checkSubscription, resetSubscription);
-}
-
-function checkSubscription(s) {
-	if (s) {
-		setSubscription(s);
+	if (currentSubscription == null) {
+		// subscribe
+		serviceWorker.pushManager.subscribe().then(function(s) {
+			if (s) {
+				setSubscription(s);
+			}
+			else {
+				resetSubscription();
+			}
+		}, resetSubscription);
 	}
 	else {
+		// unsubscribe
+		serviceWorker.pushManager.unsubscribe();
 		resetSubscription();
 	}
 }
 
-function setSubscription(s) {
+function setSubscription(subscription) {
 	document.getElementById('subscribe').textContent = '購読を解除する';
 	
-	var endpoint = s.endpoint;
-	//if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43以前への対処
-	//	endpoint += '/' + s.subscriptionId;
-	//}
+	var endpoint = subscription.endpoint;
 	
 	// 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
 	// endpointにプッシュサービスのエンドポイントのURLが格納される
 	console.log(endpoint);
 	
-	subscription = s;
+	currentSubscription = subscription;
 }
 
 function resetSubscription() {
 	document.getElementById('subscribe').textContent = '購読する';
 	
-	subscription = null;
+	currentSubscription = null;
 }
