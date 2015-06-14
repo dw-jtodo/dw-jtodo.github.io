@@ -1,1 +1,65 @@
-Hello World
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Push API sample</title>
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <script>
+        var subscription = null;
+        
+        window.addEventListener('load', function() {
+          document.getElementById('register').addEventListener('click', clickRegister, false);
+          document.getElementById('push').addEventListener('click', clickPusher , false);
+          
+          navigator.serviceWorker.ready.then(function(sw) {
+            alert('navigator.serviceWorker.ready');
+            sw.pushManager.getSubscription().then(setSubscription, resetSubscription);
+          });
+        }, false);
+        
+        function clickRegister() {
+          alert('clickRegister');
+          navigator.serviceWorker.register('push.js').then(function() {
+            alert('navigator.serviceWorker.register');
+            if (Notification.permission == 'denied') {
+              alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
+              return;
+            }
+          });
+        }
+        
+        function clickPusher() {
+          navigator.serviceWorker.ready.then(function(sw) {
+            sw.pushManager.subscribe().then(setSubscription, resetSubscription);
+          });
+        }
+        
+        function setSubscription(s) {
+          if (s) {
+            var endpoint = s.endpoint;
+            if (('subscriptionId' in s) && !s.endpoint.match(s.subscriptionId)) { // Chrome 43以前への対処
+              endpoint += '/' + s.subscriptionId;
+            }
+            
+            // 自分のWebアプリサーバ等にプッシュ通知を登録する処理をここに実装
+            // endpointにプッシュサービスのエンドポイントのURLが格納される
+            alert(endpoint);
+            
+            subscription = s;
+          }
+          else {
+            resetSubscription();
+          }
+        }
+        
+        function resetSubscription() {
+          subscription = null;
+        }
+    </script>
+    
+    <button id="register">インストール</button>
+    <button id="push">プッシュ通知を有効にする</button>
+  </body>
+</html>
