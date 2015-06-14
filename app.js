@@ -3,16 +3,12 @@ var subscription = null;
 window.addEventListener('load', function() {
   // register
   alert("register");
-  navigator.serviceWorker.register('push.js').then(function() {
+  navigator.serviceWorker.register('push.js').then(function(sw) {
     if (Notification.permission == 'denied') return resetSubscription();
     
-    // ready
-    alert("ready");
-    navigator.serviceWorker.ready.then(function(sw) {
-      // subscribe
-      alert("subscribe");
-      sw.pushManager.subscribe().then(setSubscription, resetSubscription);
-    });
+    // subscribe
+    alert("subscribe");
+    sw.pushManager.subscribe().then(setSubscription, resetSubscription);
   });
 }, false);
 
