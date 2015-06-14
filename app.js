@@ -31,7 +31,7 @@ function clickSubscribe() {
 	}
 	else {
 		// unsubscribe
-		serviceWorker.pushManager.unsubscribe();
+		currentSubscription.unsubscribe();
 		resetSubscription();
 	}
 }
