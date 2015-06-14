@@ -8,14 +8,13 @@ window.addEventListener('load', function() {
 	navigator.serviceWorker.ready.then(function(sw) {
 		if (Notification.permission == 'denied') {
 			alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
+			document.getElementById('subscribe').disabled = true;
 			return;
 		}
 		
 		if (!sw) {
 			// register
 			navigator.serviceWorker.register('push.js').then(function(sw) {
-				document.getElementById('subscribe').disabled = false;
-				
 				serviceWorker = sw;
 			});
 		}
