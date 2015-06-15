@@ -32,7 +32,7 @@ window.addEventListener('load', function() {
 				}
 			}, resetSubscription);
 		}
-	});
+	}, resetSubscription);
 }, false);
 
 function clickNotify() {
@@ -94,7 +94,7 @@ function setSubscription(subscription) {
 	currentSubscription = subscription;
 }
 
-function resetSubscription() {
+function resetSubscription(e) {
 	document.getElementById('subscribe').textContent = '購読する';
 	document.getElementById('subscribeId').textContent = '';
 	
