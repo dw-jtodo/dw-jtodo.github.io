@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
 	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
 	
 	// ready
-	//navigator.serviceWorker.ready.then(function(sw) {
+	navigator.serviceWorker.ready.then(function(sw) {
 		if (Notification.permission == 'denied') {
 			document.getElementById('subscribe').disabled = true;
 			alert('プッシュ通知を有効にできません。ブラウザの設定を確認して下さい。');
@@ -32,7 +32,7 @@ window.addEventListener('load', function() {
 				}
 			}, resetSubscription);
 		}
-	//});
+	});
 }, false);
 
 function clickNotify() {
