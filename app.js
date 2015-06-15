@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
 			return;
 		}
 		
-		if (sw == null) {
+		if (typeof(sw) == "undefined" || sw == null) {
 			// register
 			navigator.serviceWorker.register('push.js').then(function(sw) {
 				serviceWorker = sw;
