@@ -3,7 +3,7 @@ self.addEventListener('push', function(evt) {
     self.registration.showNotification(
       '新着メッセージがありますよ！',
       {
-        body: 'クリックしてね！',
+        body: 'クリックしてね！？',
         tag: 'push_test',
         icon: 'https://yt3.ggpht.com/a-/AOh14GgwvbEYRnwsIUxGU1j9iMyPdw1IK7-sp5vrgQ=s68-c-k-c0x00ffffff-no-rj-mo',
         image: 'https://i.ytimg.com/vi/9CTbic4nju4/hq720.jpg?sqp=-oaymwEZCNAFEJQDSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCubvCmoqmzz8ZWVnQSBUNmwAYBXg'
