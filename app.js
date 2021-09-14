@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 	document.getElementById('notify').addEventListener('click', clickNotify, false);
 	document.getElementById('subscribe').addEventListener('click', clickSubscribe, false);
 	
-	// ready
+	// Ready
 	navigator.serviceWorker.ready.then(function(sw) {
 		if (Notification.permission == 'denied') {
 			document.getElementById('subscribe').disabled = true;
